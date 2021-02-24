@@ -55,8 +55,6 @@ SSLCertificateKeyFile /etc/letsencrypt/live/tingmeng.ga/privkey.pem
 
 **安裝 SSL憑證前置**
 ```
-sudo apt update
-sudo apt install certbot
 #檢測上述apache設定是否正常 若正常回顯示 syntax ok
 sudo apache2ctl configtest
 #重新戴入apache2設定
@@ -64,19 +62,23 @@ sudo systemctl reload apache2
 ```
 
 **防火牆設定**
-雖然於gcp儀錶板可以設定網路介面的規則，但我第一次安裝是失敗的
+雖然於gcp儀錶板可以設定網路介面的規則，內部不用開 讓他inactive即可  
 ```
 sudo ufw status
 #若為 inactive  
 sudo ufw enable
-#若有其他apache設定
-#留 apache full就好
+# 若真要開啟為 active
+# 確保 apache full 與 upen ssh 保持開啟 否則google web ssh無法連線
 sudo ufw allow 'Apache Full'
-sudo ufw delete allow 'Apache'
+sudo ufw allow 'Openssh Full'
 ```
 
 **安裝SSL憑證**
 ```
+# 安裝Certbot套件
+sudo add-apt-repository ppa:certbot/certbot
+# 安裝Certbot的Apache package
+sudo apt install python-certbot-apache
 # your_domain 為你申請的網域名
 sudo certbot --apache -d your_domain -d www.your_domain
 # 照著步驟輸入email、勾選同意即可
