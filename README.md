@@ -85,3 +85,7 @@ sudo certbot --apache -d your_domain -d www.your_domain
 # 最後問我是否要將http全導至https，我勾是但修改失敗，我再手動至.conf中的80port加上Redirect
 # 重點為.conf中的ServerName 記得改為申請的網域名，且此為apache安裝方法，與nginx不同
 ```
+
+參考來源
+<https://rommelhong.medium.com/%E5%9C%A8ubuntu-18-04-lts-apache-2%E4%B8%AD%E5%AE%89%E8%A3%9D%E4%BD%BF%E7%94%A8lets-encrypt-ssl%E6%86%91%E8%AD%89-d2957a0b070f>
+**查閱日期 2021/02/24**
